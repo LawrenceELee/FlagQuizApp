@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- this layout file defines how to "shake" the image when user gets question incorrect -->
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- translate means "move" in this context -->
+    <!--
+    other tweened animations are: alpha (transparency),
+    scale (resize), and rotate.
+    -->
+
+    <!-- moves a View widget left (note the negative sign) 5% of parent's width
+     over a duration of 100 milliseconds -->
+    <translate
+        android:duration="100"
+        android:fromXDelta="0"
+        android:toXDelta="-5%p" />
+
+    <!-- starts where 1st animation left moving right by 5% of parent's width -->
+    <translate
+        android:duration="100"
+        android:fromXDelta="-5%p"
+        android:toXDelta="5%p"
+        android:startOffset="100" />
+
+    <!-- same as 2nd one but in reverse direction -->
+    <translate
+        android:duration="100"
+        android:fromXDelta="5%p"
+        android:toXDelta="-5%p"
+        android:startOffset="200" />
+
+    <!-- all animations happen simultaneously (in parallel) by default -->
+
+</set>
