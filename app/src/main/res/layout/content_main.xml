@@ -1,0 +1,14 @@
+<!-- This layout file is also for MainActivityFragment.java -->
+<!-- This tells the MainActivityFragment that it holds a fragment,
+ and where to find the layout file that defines stuff inside the fragment -->
+<!-- This is so that we can reuse the same layout fragment with 2 different
+orientations (portrait and landscape) or different screen sizes -->
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          xmlns:app="http://schemas.android.com/apk/res-auto"
+          app:layout_behavior="@string/appbar_scrolling_view_behavior"
+          android:id="@+id/quizFragment"
+          android:name="com.example.lawrence.flagquizapp.MainActivityFragment"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          tools:layout="@layout/fragment_main" />
