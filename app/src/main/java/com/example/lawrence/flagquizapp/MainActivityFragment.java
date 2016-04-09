@@ -176,7 +176,8 @@ public class MainActivityFragment extends Fragment {
             stream = assets.open(region + "/" + nextImage + ".png");
             Drawable flag = Drawable.createFromStream(stream, nextImage);
             flagImageView.setImageDrawable(flag);
-            animate(false);     // animate image onto screen
+            //animate(false);     // animate image onto screen
+            //loadNextFlag();
         } catch(IOException ioe) {
             Log.e(TAG, "Error loading: " + nextImage, ioe);
         } finally {
@@ -220,8 +221,13 @@ public class MainActivityFragment extends Fragment {
         // no animation for first flag
         if( correctAnswers == 0 )       return;
 
-        // animations only for SDK 21 or higher
-        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) return;
+        // animations only for SDK 21 or higher. if lower than API 21, load without animation.
+        // and exit this method.
+        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP){
+            loadNextFlag();
+            return;
+        }
+
 
         // calc mid point for x & y axis
         int centerX = (quizLinearLayout.getLeft() + quizLinearLayout.getRight()) / 2;
@@ -317,7 +323,8 @@ public class MainActivityFragment extends Fragment {
                             new Runnable() {
                                 @Override
                                 public void run() {
-                                    animate(true); // animate flag off the screen
+                                    //animate(true); // animate flag off the screen
+                                    loadNextFlag();
                                 }
                             },
                             2000
@@ -348,7 +355,8 @@ public class MainActivityFragment extends Fragment {
     public void updateGuessRows(SharedPreferences sharedPreferences) {
         // get num of guess buttons to be displayed
         // getString() uses a key (defined in MainActivity) to get a val (choices)
-        String choices = sharedPreferences.getString(MainActivity.CHOICES, null);
+        String choices = sharedPreferences.getString(MainActivity.CHOICES, "4");    // default to "4" if no prefs setting
+
         guessRows = Integer.parseInt(choices) / 2; // we have 2 buttons per row
 
         // hide all buttons LinearLayouts
