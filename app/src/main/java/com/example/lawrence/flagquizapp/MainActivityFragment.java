@@ -176,8 +176,6 @@ public class MainActivityFragment extends Fragment {
             stream = assets.open(region + "/" + nextImage + ".png");
             Drawable flag = Drawable.createFromStream(stream, nextImage);
             flagImageView.setImageDrawable(flag);
-            //animate(false);     // animate image onto screen
-            //loadNextFlag();
         } catch(IOException ioe) {
             Log.e(TAG, "Error loading: " + nextImage, ioe);
         } finally {
@@ -216,54 +214,7 @@ public class MainActivityFragment extends Fragment {
         ((Button) randomRow.getChildAt(col)).setText(countryName);
     }
 
-    // method to animate entire quizLinearLayout (on or off screen)
-    public void animate(boolean animateOut){
-        // no animation for first flag
-        if( correctAnswers == 0 )       return;
-
-        // animations only for SDK 21 or higher. if lower than API 21, load without animation.
-        // and exit this method.
-        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP){
-            loadNextFlag();
-            return;
-        }
-
-
-        // calc mid point for x & y axis
-        int centerX = (quizLinearLayout.getLeft() + quizLinearLayout.getRight()) / 2;
-        int centerY = (quizLinearLayout.getTop() + quizLinearLayout.getBottom()) / 2;
-
-        // calc animation radius
-        int radius = Math.max(quizLinearLayout.getWidth(), quizLinearLayout.getHeight());
-
-        Animator animator;
-
-        // if quizLinearLayout should animate "out" rather than "in"
-        if( animateOut ){
-            // create circular reveal animation
-            animator = ViewAnimationUtils.createCircularReveal(
-                    quizLinearLayout, centerX, centerY, radius, 0
-            );
-
-            animator.addListener(new AnimatorListenerAdapter() {
-                // callback when animation finishes will load next flag
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    loadNextFlag();
-                }
-            });
-
-        } else {
-            // quizLinearLayout should animate "in"
-            animator = ViewAnimationUtils.createCircularReveal(
-                    quizLinearLayout, centerX, centerY, 0, radius
-            );
-        }
-
-        animator.setDuration(500);      // duration is 500 millisecs
-        animator.start();               // start animation
-    }
-
+    // clicklistener for buttons
     private OnClickListener guessButtonListener = new OnClickListener() {
 
         @Override
@@ -323,7 +274,6 @@ public class MainActivityFragment extends Fragment {
                             new Runnable() {
                                 @Override
                                 public void run() {
-                                    //animate(true); // animate flag off the screen
                                     loadNextFlag();
                                 }
                             },

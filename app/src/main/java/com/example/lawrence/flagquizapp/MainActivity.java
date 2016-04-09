@@ -118,8 +118,7 @@ public class MainActivity extends AppCompatActivity {
             preferencesChanged = true;      // user changed app settings
 
             MainActivityFragment quizFragment =
-                    (MainActivityFragment) getSupportFragmentManager()
-                            .findFragmentById(R.id.quizFragment);
+                    (MainActivityFragment) getSupportFragmentManager().findFragmentById(R.id.quizFragment);
 
             if( key.equals(CHOICES) ){
                 // preferences changed # of buttons/choices for user to choose from

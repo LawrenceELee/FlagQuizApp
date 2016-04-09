@@ -6,7 +6,7 @@
     <ListPreference
         android:entries="@array/guesses_list"
         android:entryValues="@array/guesses_list"
-        android:key="pref_numberOfChoices"
+        android:key="pref_numOfChoices"
         android:title="@string/number_of_choices"
         android:summary="@string/number_of_choices_description"
         android:persistent="true"
